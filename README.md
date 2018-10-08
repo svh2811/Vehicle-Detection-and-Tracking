@@ -105,3 +105,13 @@ Here's an example result showing the heatmap from a series of frames of video, t
 
 Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.  
 
+
+#### Hog Sub-sampling Window Search
+
+Next we explore a more efficient method for doing the sliding window approach, one that allows us to only have to extract the Hog features once, . The code below defines a single function find_cars that's able to both extract features and make predictions.
+
+The `find_cars` only has to extract hog features once, for each of a small set of predetermined window sizes (defined by a scale argument), and then can be sub-sampled to get all of its overlaying windows. Each window is defined by a scaling factor that impacts the window size. The scale factor can be set on different regions of the image (e.g. small near the horizon, larger in the center).
+
+For our example are using a 64 x 64 base window. If we define `pixels per cell` as 8 x 8, then a scale of 1 would retain a window that's 8 x 8 cells (8 cells to cover 64 pixels in either direction). An overlap of each window can be defined in terms of the cell distance, using `cells_per_step`. This means that a `cells_per_step = 2` would result in a search window overlap of 75% (2 is 25% of 8, so we move 25% each time, leaving 75% overlap with the previous window). Any value of scale that is larger or smaller than one will scale the base image accordingly, resulting in corresponding change in the number of cells per window. Its possible to run this same function multiple times for different scale values to generate multiple-scaled search windows.
+
+![./examples/hog-sub.jpg][Hog Sub-sampling Window Search]
