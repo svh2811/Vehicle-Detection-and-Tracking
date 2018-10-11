@@ -7,31 +7,32 @@ In this project, the goal is to write a software pipeline to identify vehicles i
 The goals / steps of this project are the following:
 
 * Perform a Histogram of Oriented Gradients (HOG) feature extraction on a labeled training set of images and train a classifier Linear SVM classifier
-* Optionally, you can also apply a color transform and append binned color features, as well as histograms of color, to your HOG feature vector. 
+* Use color transform and append binned color features, as well as histograms of color, to HOG feature vector. 
 * Note: for those first two steps don't forget to normalize your features and randomize a selection for training and testing.
 * Implement a sliding-window technique and use your trained classifier to search for vehicles in images.
 * Run your pipeline on a video stream (start with the test_video.mp4 and later implement on full project_video.mp4) and create a heat map of recurring detections frame by frame to reject outliers and follow detected vehicles.
 * Estimate a bounding box for vehicles detected.
 
 [//]: # (Image References)
-[image1]: ./examples/car_not_car.png
-[image2]: ./examples/HOG_example.jpg
-[image3]: ./examples/sliding_windows.jpg
-[image4]: ./examples/sliding_window.jpg
-[image5]: ./examples/bboxes_and_heat.png
-[image6]: ./examples/labels_map.png
-[image7]: ./examples/output_bboxes.png
-[video1]: ./data/videos/project_video.mp4
+
+[image1](./examples/car_not_car.png)
+[image2](./examples/HOG_example.jpg)
+[image3](./examples/sliding_windows.jpg)
+[image4](./examples/sliding_window.jpg)
+[image5](./examples/bboxes_and_heat.png)
+[image6](./examples/labels_map.png)
+[image7](./examples/output_bboxes.png)
 
 ### Histogram of Oriented Gradients (HOG)
 
 #### 1. Extraction of HOG features from the training images.
 
-The code for this step is contained in the file in the function `get_hog_features()` present in `feature_processing.py`. A working example with visualization is present in cell #3 and cell #4 of python notebook.
+The code for this step is contained in the function `get_hog_features()` present in `feature_processing.py`. A working example with visualization is present in cell #3 and cell #4 of python notebook.
 
 I started by reading in all the `vehicle` and `non-vehicle` images.  Here is an example of one of each of the `vehicle` and `non-vehicle` classes:
 
 ![Car HOG](./examples/car-hist.png)
+
 ![Not Car HOG](./examples/non-car-hog.png)
 
 I also explored different color spaces and different `skimage.hog()` parameters (`orientations`, `pixels_per_cell`, and `cells_per_block`).
