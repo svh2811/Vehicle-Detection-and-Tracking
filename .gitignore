@@ -106,4 +106,6 @@ venv.bak/
 # dataset
 data/non-vehicles/*
 data/vehicles/*
+data/learned_features/*
+
 
