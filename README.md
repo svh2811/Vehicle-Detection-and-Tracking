@@ -40,7 +40,7 @@ I also explored different color spaces and different `skimage.hog()` parameters 
 
 I tried various combinations of parameters and finally settle with the below set of hyper-parameters
 
-"""
+```
 color_space = 'LUV'
 orient = 8
 pix_per_cell = 8
@@ -51,7 +51,7 @@ hist_bins = 32
 spatial_feat = True
 hist_feat = True
 hog_feat = True
-"""
+```
 
 #### 3. Support Vector Classifier training using selected HOG features.
 I first generated a feature vector for every training an testing image (cell  #6) and then used these features to train a Linear SVC (in cell #7).
@@ -63,30 +63,30 @@ I first generated a feature vector for every training an testing image (cell  #6
 Cell #8 demostrates the use of methods `slide_window()` and `search_windows()` both present in file `utils.py`. `slide_window()` return a list of bounding boxes for a given set of hyperparameters and `search_windows()` uses bounding boxes and trained Linear SVC to return a set a bounding boxes containing cars.
 
 Important Hyperparamets:
-"""
+```
 xy_window=(128, 128)
 xy_overlap=(0.80, 0.80)
 scale = {1.20, 1.35, 1.75, 2.0, 2.25, 2.65, 3.0, 3.5, 4.0}
-"""
+```
 
-![sliding-window-selection][./examples/sliding-window-selection.png]
+![sliding-window-selection](./examples/sliding-window-selection.png)
 
 #### 2. Classifier Pipeline
 
 Ultimately I searched on 9 scales using LUV 1-channel HOG features plus spatially binned color and histograms of color in the feature vector, which provided a nice result.  Here are some example images:
 
-![alt text][./examples/scale-1.png]
-![alt text][./examples/scale-2.png]
-![alt text][./examples/scale-3.png]
-![alt text][./examples/scale-4.png]
-![alt text][./examples/scale-5.png]
-![alt text][./examples/scale-6.png]
-![alt text][./examples/scale-7.png]
-![alt text][./examples/scale-8.png]
-![alt text][./examples/scale-9.png]
+![alt text](./examples/scale-1.png)
+![alt text](./examples/scale-2.png)
+![alt text](./examples/scale-3.png)
+![alt text](./examples/scale-4.png)
+![alt text](./examples/scale-5.png)
+![alt text](./examples/scale-6.png)
+![alt text](./examples/scale-7.png)
+![alt text](./examples/scale-8.png)
+![alt text](./examples/scale-9.png)
 
 Finally we generate a heat map using the bounding box from all the scales
-![alt text][./examples/pipeline-heat-map.png]
+![alt text](./examples/pipeline-heat-map.png)
 
 ---
 
@@ -111,12 +111,12 @@ To further prevent False positive from showing up, I am suming the heat collecte
 
 ### Here are six frames and their corresponding heatmaps:
 
-![alt text][./examples/heat-map-1.png]
-![alt text][./examples/heat-map-2.png]
-![alt text][./examples/heat-map-3.png]
-![alt text][./examples/heat-map-4.png]
-![alt text][./examples/heat-map-5.png]
-![alt text][./examples/heat-map-6.png]
+![alt text](./examples/heat-map-1.png)
+![alt text](./examples/heat-map-2.png)
+![alt text](./examples/heat-map-3.png)
+![alt text](./examples/heat-map-4.png)
+![alt text](./examples/heat-map-5.png)
+![alt text](./examples/heat-map-6.png)
 
 These heat map serve as an average on multiple overlapping bounding boxes.
 
