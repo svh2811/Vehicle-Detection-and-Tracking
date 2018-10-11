@@ -118,4 +118,4 @@ These heat map serve as an average on multiple overlapping bounding boxes.
 
 1. Hand engineering of features were required.
 2. This pipeline cannot be used in realtime.
-3. SVC does a satisfactory job but we can use Object Localization Neural network models 
+3. SVC does a satisfactory job but we can use Object Localization Neural network models.
