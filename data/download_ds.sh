@@ -8,4 +8,4 @@ wget https://s3.amazonaws.com/udacity-sdc/Vehicle_Tracking/non-vehicles.zip
 unzip non-vehicles.zip
 rm non-vehicles.zip
 
-rm -r _MACOSX
+rm -r __MACOSX
