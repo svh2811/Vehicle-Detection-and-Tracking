@@ -23,21 +23,11 @@ The goals / steps of this project are the following:
 [image7]: ./examples/output_bboxes.png
 [video1]: ./data/videos/project_video.mp4
 
-## [Rubric](https://review.udacity.com/#!/rubrics/513/view) Points
-### Here I will consider the rubric points individually and describe how I addressed each point in my implementation.  
-
----
-### Writeup / README
-
-#### 1. Provide a Writeup / README that includes all the rubric points and how you addressed each one.  You can submit your writeup as markdown or pdf.  [Here](https://github.com/udacity/CarND-Vehicle-Detection/blob/master/writeup_template.md) is a template writeup for this project you can use as a guide and a starting point.  
-
-You're reading it!
-
 ### Histogram of Oriented Gradients (HOG)
 
-#### 1. Explain how (and identify where in your code) you extracted HOG features from the training images.
+#### 1. Extraction of HOG features from the training images.
 
-The code for this step is contained in the file in the fucntion `get_hog_features()` present in `feature_processing.py`. A working example with visualization is present in cell #3 and cell #4 of python notebook.
+The code for this step is contained in the file in the function `get_hog_features()` present in `feature_processing.py`. A working example with visualization is present in cell #3 and cell #4 of python notebook.
 
 I started by reading in all the `vehicle` and `non-vehicle` images.  Here is an example of one of each of the `vehicle` and `non-vehicle` classes:
 
@@ -48,7 +38,7 @@ I also explored different color spaces and different `skimage.hog()` parameters 
 
 ![alt text][image2]
 
-#### 2. Explain how you settled on your final choice of HOG parameters.
+#### 2. HOG parameters.
 
 I tried various combinations of parameters and finally settle with the below set of hyper-parameters
 
@@ -65,13 +55,12 @@ hist_feat = True
 hog_feat = True
 """
 
-#### 3. Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
-
+#### 3. Support Vector Classifier training using selected HOG features.
 I first generated a feature vector for every training an testing image (cell  #6) and then used these features to train a Linear SVC (in cell #7).
 
 ### Sliding Window Search
 
-#### 1. Describe how (and identify where in your code) you implemented a sliding window search.  How did you decide what scales to search and how much to overlap windows?
+#### 1. Implemetation, scales and overlap
 
 Cell #8 demostrates the use of methods `slide_window()` and `search_windows()` both present in file `utils.py`. `slide_window()` return a list of bounding boxes for a given set of hyperparameters and `search_windows()` uses bounding boxes and trained Linear SVC to return a set a bounding boxes containing cars.
 
@@ -84,7 +73,7 @@ scale = {1.20, 1.35, 1.75, 2.0, 2.25, 2.65, 3.0, 3.5, 4.0}
 
 ![sliding-window-selection][./examples/sliding-window-selection.png]
 
-#### 2. Show some examples of test images to demonstrate how your pipeline is working.  What did you do to optimize the performance of your classifier?
+#### 2. Classifier Pipeline
 
 Ultimately I searched on 9 scales using LUV 1-channel HOG features plus spatially binned color and histograms of color in the feature vector, which provided a nice result.  Here are some example images:
 
@@ -105,13 +94,11 @@ Finally we generate a heat map using the bounding box from all the scales
 
 ### Video Implementation
 
-#### 1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (somewhat wobbly or unstable bounding boxes are ok as long as you are identifying the vehicles most of the time with minimal false positives.)
+#### 1. Final video output.
 Here's a [link to my video result](./output/videos/project_video.mp4)
 
 
-#### 2. Describe how (and identify where in your code) you implemented some kind of filter for false positives and some method for combining overlapping bounding boxes.
-
-#### Hog Sub-sampling Window Search
+#### 2. Hog Sub-sampling Window Search
 
 Next we explore a more efficient method for doing the sliding window approach, one that allows us to only have to extract the Hog features once, . The code is present in function `find_cars()` in the file `utils.py` and it is used in function `get_multipl_scale_bounding_box()` in cell #9. `find_cars()` is able to both extract features and make predictions.
 
@@ -133,12 +120,11 @@ To further prevent False positive from showing up, I am suming the heat collecte
 ![alt text][./examples/heat-map-5.png]
 ![alt text][./examples/heat-map-6.png]
 
+These heat map serve as an average on multiple overlapping bounding boxes.
 
 ---
 
-### Discussion
-
-#### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
+### Future Work
 
 1. Hand engineering of features were required.
 2. This pipeline cannot be used in realtime.
